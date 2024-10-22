@@ -1,33 +1,33 @@
 "use strict";
-const size = 200;
+const canvasSize = 700;
 
 const pi = Math.PI,
     pi2 = pi * 2,
     topAngle = pi + (pi / 2) * 3,
     bottomAngle = pi + pi / 2,
-    halfSize = size / 2,
-    c = [],
-    ctx = [],
+    halfCanvas = canvasSize / 2,
+    canvas = [],
+    canvasText = [],
     start = [0, topAngle, 0],
     end = [pi2, bottomAngle, pi2];
 
 window.addEventListener(
     "DOMContentLoaded",
     function () {
-        document.querySelector(".moonAge").style.height = `${size}px`;
-        document.querySelector(".moon").style.width = `${size}px`;
+        document.querySelector(".moonAge").style.height = `${canvasSize}px`;
+        document.querySelector(".moon").style.width = `${canvasSize}px`;
         for (let i = 0; i < 3; i++) {
-            c[i] = document.getElementById(`a${i}`);
-            c[i].style.width = `${size}px`;
-            c[i].style.height = `${size}px`;
-            c[i].width = size;
-            c[i].height = size;
-            ctx[i] = c[i].getContext("2d");
-            ctx[i].fillStyle = i === 0 ? "#444444" : "#ffff00";
-            ctx[i].arc(halfSize, halfSize, halfSize * 0.95, start[i], end[i]);
-            ctx[i].fill();
+            canvas[i] = document.getElementById(`layer${i}`);
+            canvas[i].style.width = `${canvasSize}px`;
+            canvas[i].style.height = `${canvasSize}px`;
+            canvas[i].width = canvasSize;
+            canvas[i].height = canvasSize;
+            canvasText[i] = canvas[i].getContext("2d");
+            canvasText[i].fillStyle = i === 0 ? "#444444" : "#ffff4D";
+            canvasText[i].arc(halfCanvas, halfCanvas, halfCanvas * 0.95, start[i], end[i]);
+            canvasText[i].fill();
         }
-        const e = document.querySelector("#c");
+        const e = document.querySelector("#calender");
         e.value = new Date().toLocaleDateString("sv");
         chg(e.value);
     },
@@ -43,22 +43,22 @@ function chg(d) {
         // 平均朔望月
         r = 29.530588853 + 2.162e-9 * ((date.getTime() - 946727935816) / 315576e5),
         age = day > 0 ? day % r : (r + (day % r)) % r;
-    document.querySelector("#disp").innerHTML = `${date.toLocaleDateString()}<br>月齢:${age.toFixed(
-        1
-    )}`;
+    document.querySelector(
+        "#moonDate"
+    ).innerHTML = `${date.toLocaleDateString()}<br>月齢:${age.toFixed(1)}`;
     appearance(age, r);
 }
 
-function appearance(age, m) {
-    const s = Math.cos((pi2 * age) / m),
-        s2 = Math.sin((pi2 * age) / m),
-        r = Math.abs(halfSize * s);
-    c[1].style.transform = `rotate(${s2 > 0 ? 180 : 0}deg)`;
-    ctx[2].clearRect(0, 0, size, size);
-    ctx[2].beginPath();
-    ctx[2].fillStyle = s > 0 ? "#444444" : "#ffff00";
-    ctx[2].arc(halfSize, halfSize, halfSize * 0.95, 0, pi2);
-    ctx[2].fill();
-    c[2].style.width = `${r * 2}px`;
-    c[2].style.left = `${halfSize - r}px`;
+function appearance(age, moon) {
+    const s = Math.cos((pi2 * age) / moon),
+        s2 = Math.sin((pi2 * age) / moon),
+        r = Math.abs(halfCanvas * s);
+    canvas[1].style.transform = `rotate(${s2 > 0 ? 180 : 0}deg)`;
+    canvasText[2].clearRect(0, 0, canvasSize, canvasSize);
+    canvasText[2].beginPath();
+    canvasText[2].fillStyle = s > 0 ? "#444444" : "#ffff4D";
+    canvasText[2].arc(halfCanvas, halfCanvas, halfCanvas * 0.95, 0, pi2);
+    canvasText[2].fill();
+    canvas[2].style.width = `${r * 2}px`;
+    canvas[2].style.left = `${halfCanvas - r}px`;
 }

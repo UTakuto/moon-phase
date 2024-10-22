@@ -12,13 +12,13 @@ body {
     background: #232323;
 }
 
-.d {
+.moon {
     background: #232323;
     width: 150px;
     margin: 20px;
 }
 
-#disp {
+#moonDate {
     color: #fefefe;
 }
 
@@ -27,7 +27,7 @@ body {
     height: 200px;
 }
 
-canvas[id*="a"] {
+canvas[id*="layer"] {
     position: absolute;
     top: 0px;
     left: 0px;
