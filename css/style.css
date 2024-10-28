@@ -6,7 +6,7 @@
 body {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     height: 100vh;
     background: #232323;
@@ -34,12 +34,12 @@ canvas[id*="layer"] {
 }
 
 .btnWrap {
-    width: 40%;
+    width: 10%;
     gap: 20px;
     display: flex;
     flex-wrap: wrap;
     /* flex-direction: row-reverse; */
-    justify-content: center;
+    justify-content: end;
 }
 
 button {

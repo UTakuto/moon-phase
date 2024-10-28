@@ -91,6 +91,8 @@ function chg(date) {
         r = 29.530588853 + 2.162e-9 * ((date.getTime() - 946727935816) / 315576e5), // 平均朔望月（29.53日周期）
         age = day > 0 ? day % r : (r + (day % r)) % r; // 月齢を0〜29.53日の範囲で計算
 
+    // console.log(date.getTime());
+
     // 月齢をHTMLに表示
     document.querySelector(
         "#moonDate"
@@ -102,12 +104,13 @@ function chg(date) {
 // 月の見た目を更新する関数
 function appearance(age, moon) {
     // 月の陰影を計算するための三角関数
-    const s = Math.cos((pi2 * age) / moon), // 月齢に応じたコサイン値（陰影の方向）
-        s2 = Math.sin((pi2 * age) / moon), // 月齢に応じたサイン値（回転方向）
+    const s = Math.cos((pi2 * age) / moon), // 月齢に応じたcos値（陰影の方向）
+        s2 = Math.sin((pi2 * age) / moon), // 月齢に応じたsin値（回転方向）
         r = Math.abs(halfCanvas * s); // 陰影のサイズを計算
 
     // 月の回転方向を設定。サイン値が正なら180度回転
     canvas[1].style.transform = `rotate(${s2 > 0 ? 180 : 0}deg)`;
+    console.log("s", s, "s2", s2);
 
     // 2番目のレイヤーをクリアして、新しい陰影を描画
     canvasText[2].clearRect(0, 0, canvasSize, canvasSize); // キャンバスをクリア
