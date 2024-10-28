@@ -5,8 +5,8 @@
 
 body {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     height: 100vh;
     background: #232323;
@@ -34,10 +34,11 @@ canvas[id*="layer"] {
 }
 
 .btnWrap {
-    width: 100%;
+    width: 40%;
     gap: 20px;
     display: flex;
-    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    /* flex-direction: row-reverse; */
     justify-content: center;
 }
 

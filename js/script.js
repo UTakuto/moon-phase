@@ -14,6 +14,7 @@ const pi = Math.PI, // 円周率
 
 let currentDate = new Date(); // 現在の日付を保持
 let timer = null; // タイマーを保持
+let speed = 1000; // タイマーの間隔を保持（デフォルトは1秒）
 
 // DOM が完全にロードされた時に実行
 window.addEventListener(
@@ -47,6 +48,13 @@ window.addEventListener(
         document.getElementById("next").addEventListener("click", () => startTimer(1));
         document.getElementById("prev").addEventListener("click", () => startTimer(-1));
         document.getElementById("stop").addEventListener("click", stopTimer);
+        document.getElementById("today").addEventListener("click", () => {
+            stopTimer();
+            currentDate = new Date();
+            chg(currentDate);
+        });
+        document.getElementById("speed1x").addEventListener("click", () => setSpeed(1000));
+        document.getElementById("speed2x").addEventListener("click", () => setSpeed(500)); // 2倍速に設定
     },
     false
 );
@@ -57,7 +65,7 @@ function startTimer(direction) {
     timer = setInterval(() => {
         currentDate.setDate(currentDate.getDate() + direction);
         chg(currentDate);
-    }, 1000);
+    }, speed);
 }
 
 // タイマーを停止する関数
@@ -66,6 +74,11 @@ function stopTimer() {
         clearInterval(timer);
         timer = null;
     }
+}
+
+// 速度を設定する関数
+function setSpeed(newSpeed) {
+    speed = newSpeed;
 }
 
 // 日付が変更された時に月齢を計算する関数
