@@ -32,3 +32,16 @@ canvas[id*="layer"] {
     top: 0px;
     left: 0px;
 }
+
+.btnWrap {
+    width: 100%;
+    gap: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+
+button {
+    width: 100px;
+    height: 30px;
+}
